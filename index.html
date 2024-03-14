@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- intl-tel-input CSS dosyası -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css">
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root">
+    <div class="section-full p-tb80 tm-shortcode-wrap">
+        <div class="container">
+            <div class="section-head text-left text-black">
+                <h2 class="text-uppercase font-36">Bize ulaşın</h2>
+                <div class="wt-separator-outer">
+                    <div class="wt-separator bg-black"></div>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="wt-box">
+                    <form id="contactForm" class="contact-form cons-contact-form" action="{{route('contact_form')}}" method="post">
+                        <div id="firstPage" class="contact-one p-a40 p-r150">
+                            <h3 class="text-uppercase font-24">Yetkili Bilgileri</h3>
+                            <div class="form-group">
+                                <input name="username" type="text" required="" class="form-control" placeholder="Adınız">
+                            </div>
+                            <div class="form-group">
+                                <input name="email" type="email" class="form-control" required="" placeholder="E-Posta Adresiniz">
+                            </div>
+                            <div class="form-group">
+                                <input id="phone" name="phone" type="tel" class="form-control" placeholder="Telefon Numaranız">
+                            </div>
+                            <button id="nextBtn" type="button" class="site-button black radius-no text-uppercase" onclick="nextPage()">
+                                <span class="font-12 letter-spacing-5">İleri</span>
+                            </button>
+                        </div>
+                        
+                        <div id="secondPage" class="contact-two p-a40 p-r150" style="display: none;">
+                            <h3 class="text-uppercase font-24">Firma Bilgileri</h3>
+                            <div class="form-group">
+                                <input name="companyname" type="text" class="form-control" placeholder="Firma Adı">
+                            </div>
+                            <div class="form-group">
+                                <label>Şirket Tipi:</label><br>
+                                <input id="individualRadio" type="radio" name="companytype" value="individual"> <label for="individualRadio">Şahıs Şirketi</label><br>
+                                <input id="limitedRadio" type="radio" name="companytype" value="limited"> <label for="limitedRadio">Limited Şirket</label>
+                            </div>                            
+                            <div class="form-group">
+                                <input name="taxnumber" id="taxnumber" type="text" class="form-control" placeholder="Vergi Numarası">
+                            </div>
+                            <button id="prevBtn" type="button" class="site-button black radius-no text-uppercase" onclick="prevPage()">
+                                <span class="font-12 letter-spacing-5">Geri</span>
+                            </button>
+                            <button id="nextBtn2" type="button" class="site-button black radius-no text-uppercase" onclick="nextPage2()">
+                                <span class="font-12 letter-spacing-5">İleri</span>
+                            </button>
+                        </div>
+                        
+                        <div id="thirdPage" class="contact-three p-a40 p-r150" style="display: none;">
+                            <h3 class="text-uppercase font-24">Teknoloji İhtiyaçları</h3>
+                            <div class="form-group">
+                                <textarea name="technologyneeds" rows="5" class="form-control" placeholder="Teknoloji ihtiyaçlarınızı yazınız"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Bizi Nereden Duydunuz?</label><br>
+ <input type="checkbox" id="googleCheckbox" name="how_did_you_hear_about_us[]" value="Google"> <label for="googleCheckbox">Google</label><br>
+        <input type="checkbox" id="socialMediaCheckbox" name="how_did_you_hear_about_us[]" value="Sosyal Medya"> <label for="socialMediaCheckbox">Sosyal Medya</label><br>
+        <input type="checkbox" id="friendRecommendationCheckbox" name="how_did_you_hear_about_us[]" value="Arkadaş Önerisi"> <label for="friendRecommendationCheckbox">Arkadaş Önerisi</label><br>
+        <input type="checkbox" id="otherCheckbox" name="how_did_you_hear_about_us[]" value="Diğer"> <label for="otherCheckbox">Diğer</label><br>
+                            </div>
+                            <button id="prevBtn2" type="button" class="site-button black radius-no text-uppercase" onclick="prevPage2()">
+                                <span class="font-12 letter-spacing-5">Geri</span>
+                            </button>
+                            <button class="site-button black radius-no text-uppercase">
+                                <span class="font-12 letter-spacing-5">Gönder</span>
+                            </button>
+                        </div>
+                        <div class="bg-black text-white p-a30 m-t20">
+                            <div class="wt-icon-box-wraper left p-b30">
+                                <div class="icon-sm"><i class="iconmoon-email"></i></div>
+                                <div class="icon-content text-white">
+                                    <h5 class="m-t0 text-uppercase">E-posta Adresimiz</h5>
+                                    <a href="mailto:info@muzekolektifi.com">
+                                        <p>info<i class="fa fa-at"></i>muzekolektifi.com</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- intl-tel-input ve libphonenumber kütüphaneleri -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
+
+<script>
+    // intl-tel-input'i etkinleştirme
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+
+    function nextPage() {
+        document.getElementById("firstPage").style.display = "none";
+        document.getElementById("secondPage").style.display = "block";
+    }
+
+    function prevPage() {
+        document.getElementById("secondPage").style.display = "none";
+        document.getElementById("firstPage").style.display = "block";
+    }
+
+    function nextPage2() {
+        document.getElementById("secondPage").style.display = "none";
+        document.getElementById("thirdPage").style.display = "block";
+    }
+
+    function prevPage2() {
+        document.getElementById("thirdPage").style.display = "none";
+        document.getElementById("secondPage").style.display = "block";
+    }
+
+    function changeTaxNumberLength(length) {
+        document.getElementById("taxnumber").setAttribute("maxlength", length);
+    }    
+
+    // Radio butonlarının etkileşim kodu
+    var individualRadio = document.querySelector('#individualRadio');
+    var limitedRadio = document.querySelector('#limitedRadio');
+    individualRadio.addEventListener('click', function() {
+        changeTaxNumberLength(11);
+    });
+    limitedRadio.addEventListener('click', function() {
+        changeTaxNumberLength(10);
+    });
+</script>
+
+</body>
+</html>
