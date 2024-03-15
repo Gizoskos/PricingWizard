@@ -40,7 +40,7 @@
                             </button>
                         </div>
                         
-                        <div id="secondPage" class="contact-two p-a40 p-r150" style="display: none;">
+                        <div id="secondPage" class="contact-one p-a40 p-r150" style="display: none;">
                             <h3 class="text-uppercase font-24">Firma Bilgileri</h3>
                             <div class="form-group">
                                 <input name="companyname" type="text" class="form-control" placeholder="Firma Adı">
@@ -61,7 +61,7 @@
                             </button>
                         </div>
                         
-                        <div id="thirdPage" class="contact-three p-a40 p-r150" style="display: none;">
+                        <div id="thirdPage" class="contact-one p-a40 p-r150" style="display: none;">
                             <h3 class="text-uppercase font-24">Teknoloji İhtiyaçları</h3>
                             <div class="form-group">
                                 <textarea name="technologyneeds" rows="5" class="form-control" placeholder="Teknoloji ihtiyaçlarınızı yazınız"></textarea>
@@ -109,29 +109,37 @@
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
 
-    function nextPage() {
-        document.getElementById("firstPage").style.display = "none";
-        document.getElementById("secondPage").style.display = "block";
-    }
 
-    function prevPage() {
-        document.getElementById("secondPage").style.display = "none";
-        document.getElementById("firstPage").style.display = "block";
-    }
-
-    function nextPage2() {
-        document.getElementById("secondPage").style.display = "none";
-        document.getElementById("thirdPage").style.display = "block";
-    }
-
-    function prevPage2() {
-        document.getElementById("thirdPage").style.display = "none";
-        document.getElementById("secondPage").style.display = "block";
-    }
-
+    
     function changeTaxNumberLength(length) {
         document.getElementById("taxnumber").setAttribute("maxlength", length);
     }    
+
+    function showPage(pageId) {
+    // Hide all pages
+    document.getElementById("firstPage").style.display = "none";
+    document.getElementById("secondPage").style.display = "none";
+    document.getElementById("thirdPage").style.display = "none";
+    
+    // Show the specified page
+    document.getElementById(pageId).style.display = "block";
+    }
+
+    function nextPage() {
+        showPage("secondPage");
+    }
+
+    function prevPage() {
+        showPage("firstPage");
+    }
+
+    function nextPage2() {
+        showPage("thirdPage");
+    }
+
+    function prevPage2() {
+        showPage("secondPage");
+    }
 
     // Radio butonlarının etkileşim kodu
     var individualRadio = document.querySelector('#individualRadio');
